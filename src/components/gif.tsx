@@ -5,12 +5,14 @@ export function Gifs(){
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
   // const loaderRef = useRef(null);
 
   async function getGifs(){
     try{
       setLoading(true)
-      const response = await fetch(`https://api.giphy.com/v1/gifs/trending?api_key=WwjKps1e6QL5VUW55GhzXJl84gOU8zZw&limit=25&offset=${offset}`)
+      const response = await fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=25&offset=${offset}`)
       if (!response.ok) {
       throw new Error(`HTTP Error: ${response.status}`);
       }
