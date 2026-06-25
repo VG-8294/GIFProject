@@ -1,19 +1,58 @@
 body{
   background-color: rgb(24, 24, 24);
   color: white;
+  height: 4000px;
 }
+
+.scrolledHeader{
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: 100%;
+  background-color: rgb(24, 24, 24);
+  justify-content: space-around;
+  align-items: center;
+  padding: 30px;
+  /* animation: slideDown 0.4s ease; */
+  animation: fadeIn 0.4s ease;
+}
+
+
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+  }
+
+  to{
+    opacity: 1;
+  }
+}
+
+/* @keyframes slideDown{
+  from{
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
+} */
+
+#searchBar{
+  width: 100%;
+}
+
 .header{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  width: 100%;
 }
 
 .nav{
   display: flex;
-  justify-content: space-evenly;
-  width: 60%;
-  margin-left: 70px;
+  gap: 20px;
 }
 
 .navBtn{
