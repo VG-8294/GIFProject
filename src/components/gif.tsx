@@ -1,14 +1,21 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 
-export function Gifs() {
-  const [gifs, setGifs] = useState<any[]>([]);
-  const [offset, setOffset] = useState(0);
+type Props ={
+  offset: number;
+  setOffset: React.Dispatch<React.SetStateAction<number>>;
+  gifs:any[];
+  setGifs: React.Dispatch<React.SetStateAction<any[]>>;
+}
+
+
+export function Gifs({offset, setOffset, gifs, setGifs} : Props) {
   const [loading, setLoading] = useState(false);
   const isLoading = useRef(false);
   const loaderRef = useRef(null);
 
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  const API_KEY2 = import.meta.env.VITE_API_KEY2;
+  // const API_KEY = import.meta.env.VITE_API_KEY;
+  // const API_KEY2 = import.meta.env.VITE_API_KEY2;
+  const API_KEY3 = import.meta.env.VITE_API_KEY3;
 
   const getGifs = useCallback(async () => {
     if (isLoading.current) return;  // prevent duplicate calls
@@ -16,7 +23,7 @@ export function Gifs() {
       isLoading.current = true;
       setLoading(true);
       const response = await fetch(
-        `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY2}&limit=10&offset=${offset}`
+        `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY3}&limit=10&offset=${offset}`
       );
       if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
       const data = await response.json();
