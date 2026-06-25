@@ -1,4 +1,6 @@
 export function SearchBar(){
+  
+
   return (
     <div className='searchBar'>
       <input className="search" type='text' placeholder='Search all GIFs here'></input>
