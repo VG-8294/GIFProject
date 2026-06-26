@@ -1,4 +1,13 @@
-export function ReactionsDropDown(){
+type Props ={
+    setQuery:React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function ReactionsDropDown({setQuery}: Props){
+
+    function search(keyword: string){
+        setQuery(keyword);
+    }
+
     return(
         <div className="reactionsDropdown">
             <div className="dropDown">
@@ -8,63 +17,63 @@ export function ReactionsDropDown(){
             </div>
             <div className="menu">
                 <div className="column">
-            <p>Thank You</p>
-            <p>Love</p>
-            <p>Funny</p>
-            <p>Yes</p>
-            <p>Excited</p>
-            <p>Kiss</p>
-            <p>Hello</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Thank You</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Love</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Funny</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Yes</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Excited</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Kiss</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Hello</p>
             </div>
 
             <div className="column">
-            <p>Happy</p>
-            <p>Sad</p>
-            <p>No</p>
-            <p>Crying</p>
-            <p>Waiting</p>
-            <p>Congratulations</p>
-            <p>Yay</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Happy</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Sad</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>No</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Crying</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Waiting</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Congratulations</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Yay</p>
             </div>
 
             <div className="column">
-            <p>Hug</p>
-            <p>What</p>
-            <p>Laughing</p>
-            <p>Dancing</p>
-            <p>Confused</p>
-            <p>Wow</p>
-            <p>Celebrate</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Hug</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>What</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Laughing</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Dancing</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Confused</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Wow</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Celebrate</p>
             </div>
 
             <div className="column">
-            <p>Shocked</p>
-            <p>Thumbs Up</p>
-            <p>WTF</p>
-            <p>Tired</p>
-            <p>LOL</p>
-            <p>Nope</p>
-            <p>Bye</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Shocked</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Thumbs Up</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>WTF</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Tired</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>LOL</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Nope</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Bye</p>
             </div>
 
             <div className="column">
-            <p>Angry</p>
-            <p>Welcome</p>
-            <p>OK</p>
-            <p>Cute</p>
-            <p>Miss You</p>
-            <p>Sleepy</p>
-            <p>Thinking</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Angry</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Welcome</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>OK</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Cute</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Miss You</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Sleepy</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Thinking</p>
             </div>
 
             <div className="column">
-            <p>Eye Roll</p>
-            <p>Do It</p>
-            <p>Side Eye</p>
-            <p>Crazy</p>
-            <p>Fire</p>
-            <p>Scared</p>
-            <p>Huh</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Eye Roll</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Do It</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Side Eye</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Crazy</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Fire</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Scared</p>
+            <p onClick={(e) => search(e.currentTarget.textContent)}>Huh</p>
             </div>
             </div>
         </div>

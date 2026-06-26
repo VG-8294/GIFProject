@@ -12,7 +12,6 @@ function App() {
   const [gifs, setGifs] = useState<any[]>([]);
   const [isScrolled, setIsScrolled] = useState(false);
   const [query, setQuery] = useState("");
-
   useEffect(()=>{
      const handleScroll = ()=>{
       setIsScrolled(window.scrollY > 100);
@@ -30,9 +29,9 @@ function App() {
       <ScrolledHeader></ScrolledHeader>
       <SearchBar query={query} setQuery={setQuery}></SearchBar>
       </div>}
-    <Header></Header>
+    <Header setQuery={setQuery}></Header>
     <SearchBar query={query} setQuery={setQuery}></SearchBar>
-    <TrendingBar offset={offset} setOffset={setOffset} gifs={gifs} setGifs={setGifs} query={query} setQuery={setQuery} ></TrendingBar>
+    <TrendingBar setQuery={setQuery} ></TrendingBar>
     <Gifs offset={offset} setOffset={setOffset} gifs={gifs} setGifs={setGifs} query={query}></Gifs>
     </>
   )

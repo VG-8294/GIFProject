@@ -1,7 +1,6 @@
 body{
   background-color: rgb(24, 24, 24);
   color: white;
-  height: 4000px;
 }
 
 .scrolledHeader{
@@ -325,3 +324,23 @@ body{
   width: 40px;
 }
 
+.errorSection{
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error{
+  width: 20%;
+}
+
+.loadingSection{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading{
+  width: 80px;
+}
