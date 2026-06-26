@@ -4,18 +4,19 @@ type Props ={
   setOffset: React.Dispatch<React.SetStateAction<number>>;
   gifs:any[];
   setGifs: React.Dispatch<React.SetStateAction<any[]>>;
+  query:string;
+  setQuery:React.Dispatch<React.SetStateAction<string>>;
 }
-export function SearchBar({offset, setOffset, gifs, setGifs} : Props){
-  const [query, setQuery] = useState("");
+export function SearchBar({offset, setOffset, gifs, setGifs, query, setQuery} : Props){
 
   // const API_KEY = import.meta.env.VITE_API_KEY;
-  const API_KEY2 = import.meta.env.VITE_API_KEY2;
-  // const API_KEY3 = import.meta.env.VITE_API_KEY3;
+  // const API_KEY2 = import.meta.env.VITE_API_KEY2;
+  const API_KEY3 = import.meta.env.VITE_API_KEY3;
 
   async function getSearchedGifs(){
-    const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY2}&q=${query}&limit=10&offset=${offset}`)
+    setOffset(0);
+    const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY3}&q=${query}&limit=10&offset=${offset}`)
     const data = await response.json()
-    setGifs([]);
     setGifs(data.data);
   }
 
