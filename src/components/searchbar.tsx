@@ -1,29 +1,14 @@
 import { useState } from "react";
 type Props ={
-  offset: number;
-  setOffset: React.Dispatch<React.SetStateAction<number>>;
-  gifs:any[];
-  setGifs: React.Dispatch<React.SetStateAction<any[]>>;
   query:string;
   setQuery:React.Dispatch<React.SetStateAction<string>>;
 }
-export function SearchBar({offset, setOffset, gifs, setGifs, query, setQuery} : Props){
-
-  // const API_KEY = import.meta.env.VITE_API_KEY;
-  // const API_KEY2 = import.meta.env.VITE_API_KEY2;
-  const API_KEY3 = import.meta.env.VITE_API_KEY3;
-
-  async function getSearchedGifs(){
-    setOffset(0);
-    const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY3}&q=${query}&limit=10&offset=${offset}`)
-    const data = await response.json()
-    setGifs(data.data);
-  }
+export function SearchBar({query, setQuery} : Props){
 
   return (
     <div className='searchBar' id="searchBar">
-      <input className="search" type='text' placeholder='Search all GIFs here' onChange={(e)=> setQuery(e.target.value)}></input>
-      <img onClick={getSearchedGifs} className='searchImg' src="/src/assets/search.png" alt="" />
+      <input value={query} className="search" type='text' placeholder='Search all GIFs here' onChange={(e)=> setQuery(e.target.value)}></input>
+      <img className='searchImg' src="/src/assets/search.png" alt="" />
     </div>
   )
 }
