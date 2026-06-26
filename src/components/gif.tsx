@@ -51,20 +51,19 @@ export function Gifs({ query, offset, setOffset, gifs, setGifs}: Props) {
     }
   }, [query, offset]);
 
-  // Fetch whenever query or offset changes
   useEffect(() => {
     getGifs();
     console.log("getGifs generated");
   }, [getGifs]);
 
-  // Reset when a new search starts
+  
   useEffect(() => {
     console.log("getgifs")
     setGifs([]);
     setOffset(0);
   }, [query]);
 
-  // Infinite scroll
+  
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !isLoading.current) {
