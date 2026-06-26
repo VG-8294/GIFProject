@@ -4,7 +4,7 @@ export function Header(){
   return (
     <div className='header'>
       <div className="headerImg">
-    <img className="haederImg" src="https://giphy.com/static/img/giphy-logo.webp" alt="" />
+    <h1>GIFs........</h1>
     </div>
     <div>
       <Nav></Nav>
