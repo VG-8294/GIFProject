@@ -19,10 +19,6 @@ export function TrendingBar({setQuery}: Props){
         "Memes"
     ]
 
-    // const API_KEY = import.meta.env.VITE_API_KEY;
-    // const API_KEY2 = import.meta.env.VITE_API_KEY2;
-    // const API_KEY3 = import.meta.env.VITE_API_KEY3;
-
     function search(keyword: string){
         setQuery(keyword)
     }

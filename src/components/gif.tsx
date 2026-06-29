@@ -14,8 +14,8 @@ export function Gifs({ query, offset, setOffset, gifs, setGifs}: Props) {
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const isLoading = useRef(false);
 
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  // const API_KEY2 = import.meta.env.VITE_API_KEY2;
+  // const API_KEY = import.meta.env.VITE_API_KEY;
+  const API_KEY2 = import.meta.env.VITE_API_KEY2;
   // const API_KEY3 = import.meta.env.VITE_API_KEY3;
 
   const getGifs = useCallback(async () => {
@@ -28,9 +28,9 @@ export function Gifs({ query, offset, setOffset, gifs, setGifs}: Props) {
       let url = "";
 
       if (query.trim() === "") {
-        url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=10&offset=${offset}`;
+        url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY2}&limit=10&offset=${offset}`;
       } else {
-        url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=25&offset=${offset}`;
+        url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY2}&q=${query}&limit=25&offset=${offset}`;
       }
 
       const response = await fetch(url);

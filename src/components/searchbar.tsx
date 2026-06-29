@@ -1,4 +1,3 @@
-import { useState } from "react";
 type Props ={
   query:string;
   setQuery:React.Dispatch<React.SetStateAction<string>>;
