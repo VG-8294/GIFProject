@@ -3,25 +3,18 @@ import './App.css'
 import {Header} from "./components/header";
 import { SearchBar } from './components/searchbar';
 import { Gifs } from './components/gif';
-import {useState } from 'react';
+import {useEffect, useState } from 'react';
 // import { ScrolledHeader } from './components/ScrolledHeader';
 import { TrendingBar } from './components/trendingBar';
+import { useDebounce } from './hooks/debounce';
 function App() {
 
-  const [offset, setOffset] = useState(0);
-  const [gifs, setGifs] = useState<any[]>([]);
+  // const [offset, setOffset] = useState(0);
+  // const [gifs, setGifs] = useState<any[]>([]);
   // const [isScrolled, setIsScrolled] = useState(false);
   const [query, setQuery] = useState("");
-  // useEffect(()=>{
-  //    const handleScroll = ()=>{
-  //     setIsScrolled(window.scrollY > 100);
-  //    }
-
-  //    window.addEventListener('scroll', handleScroll);
-
-  //    return ()=> window.removeEventListener('scroll', handleScroll);
-
-  // }, [])
+  
+  const debouncedQuery = useDebounce(query, 500);
 
   return (
     <div className='container'>
@@ -31,7 +24,7 @@ function App() {
         <TrendingBar setQuery={setQuery} ></TrendingBar>
       </div>
       <div className='mainContent'>
-          <Gifs query={query}></Gifs>
+          <Gifs query={debouncedQuery}></Gifs>
       </div>
       <div className='footer'>
         <div>

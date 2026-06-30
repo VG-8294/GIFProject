@@ -14,9 +14,9 @@ export function Gifs({ query }: Props) {
   const loaderRef = useRef<HTMLDivElement | null>(null);
   // const isLoading = useRef(false);
 
-  const API_KEY = import.meta.env.VITE_API_KEY;
+  // const API_KEY = import.meta.env.VITE_API_KEY;
   // const API_KEY2 = import.meta.env.VITE_API_KEY2;
-  // const API_KEY3 = import.meta.env.VITE_API_KEY3;
+  const API_KEY3 = import.meta.env.VITE_API_KEY3;
 
   const {
   data,
@@ -34,16 +34,12 @@ export function Gifs({ query }: Props) {
     let url = "";
 
     if (query.trim() === "") {
-      url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=10&offset=${pageParam}`;
+      url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY3}&limit=10&offset=${pageParam}`;
     } else {
-      url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=10&offset=${pageParam}`;
+      url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY3}&q=${query}&limit=10&offset=${pageParam}`;
     }
 
     const response = await axios.get(url);
-
-    if (!response) {
-      throw new Error("Something went wrong");
-    }
 
     return response.data;
   },
@@ -58,17 +54,6 @@ export function Gifs({ query }: Props) {
 });
 
   const gifs = data?.pages.flatMap((page: any) => page.data ?? []) ?? [];
-
-  // useEffect(() => {
-  //   getGifs();
-  // }, [getGifs]);
-
-  
-  // useEffect(() => {
-  //   setGifs([]);
-  //   setOffset(0);
-  // }, [query]);
-
   
   useEffect(() => {
   const observer = new IntersectionObserver((entries) => {
