@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import axios from "axios";
 
 
 type Props = {
@@ -38,19 +39,17 @@ export function Gifs({ query }: Props) {
       url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=10&offset=${pageParam}`;
     }
 
-    const response = await fetch(url);
+    const response = await axios.get(url);
 
-    if (!response.ok) {
+    if (!response) {
       throw new Error("Something went wrong");
     }
 
-    const result = await response.json();
-
-    return result;
+    return response.data;
   },
 
   getNextPageParam: (lastPage) => {
-    if (lastPage.data.length === 0) {
+    if (!lastPage?.data || lastPage.data.length === 0) {
       return undefined;
     }
 
@@ -58,7 +57,7 @@ export function Gifs({ query }: Props) {
   },
 });
 
-  const gifs = data?.pages.flatMap((page) => page.data) ?? [];
+  const gifs = data?.pages.flatMap((page: any) => page.data ?? []) ?? [];
 
   // useEffect(() => {
   //   getGifs();
