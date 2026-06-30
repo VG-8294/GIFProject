@@ -1,83 +1,81 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useEffect, useRef } from "react";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import axios from "axios";
+
+
 type Props = {
   query: string;
-  offset: number;
-  setOffset: React.Dispatch<React.SetStateAction<number>>;
-  gifs:any[];
-  setGifs: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-export function Gifs({ query, offset, setOffset, gifs, setGifs}: Props) {
-  const [loading, setLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+export function Gifs({ query }: Props) {
+  // const [loading, setLoading] = useState(false);
+  // const [isError, setIsError] = useState(false);
   const loaderRef = useRef<HTMLDivElement | null>(null);
-  const isLoading = useRef(false);
+  // const isLoading = useRef(false);
 
   // const API_KEY = import.meta.env.VITE_API_KEY;
-  const API_KEY2 = import.meta.env.VITE_API_KEY2;
-  // const API_KEY3 = import.meta.env.VITE_API_KEY3;
+  // const API_KEY2 = import.meta.env.VITE_API_KEY2;
+  const API_KEY3 = import.meta.env.VITE_API_KEY3;
 
-  const getGifs = useCallback(async () => {
-    if (isLoading.current) return;
-    setIsError(false);
-    isLoading.current = true;
-    setLoading(true);
+  const {
+  data,
+  isLoading,
+  isError,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
+} = useInfiniteQuery({
+  queryKey: ["gifs", query],
 
-    try {
-      let url = "";
+  initialPageParam: 0,
 
-      if (query.trim() === "") {
-        url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY2}&limit=10&offset=${offset}`;
-      } else {
-        url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY2}&q=${query}&limit=25&offset=${offset}`;
-      }
+  queryFn: async ({ pageParam }) => {
+    let url = "";
 
-      const data = await axios.get(url);
-      console.log(data);
-
-      if (!data) {
-        throw new Error(`HTTP Error: ${data}`);
-      }
-
-      setGifs((prev) => [...prev, ...data.data.data]);
-    } catch (err) {
-      console.log(err);
-      setIsError(true);
-    } finally {
-      isLoading.current = false;
-      setLoading(false);
-    }
-  }, [query, offset]);
-
-  useEffect(() => {
-    getGifs();
-  }, [getGifs]);
-
-  
-  useEffect(() => {
-    setGifs([]);
-    setOffset(0);
-  }, [query]);
-
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !isLoading.current) {
-        setOffset((prev) => prev + 10);
-      }
-    });
-
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
+    if (query.trim() === "") {
+      url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY3}&limit=10&offset=${pageParam}`;
+    } else {
+      url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY3}&q=${query}&limit=10&offset=${pageParam}`;
     }
 
-    return () => observer.disconnect();
-  }, []);
+    const response = await axios.get(url);
+
+    return response.data;
+  },
+
+  getNextPageParam: (lastPage) => {
+    if (!lastPage?.data || lastPage.data.length === 0) {
+      return undefined;
+    }
+
+    return lastPage.pagination.offset + lastPage.pagination.count;
+  },
+});
+
+  const gifs = data?.pages.flatMap((page: any) => page.data ?? []) ?? [];
+  
+  useEffect(() => {
+  const observer = new IntersectionObserver((entries) => {
+    if (
+      entries[0].isIntersecting &&
+      hasNextPage &&
+      !isFetchingNextPage
+    ) {
+      fetchNextPage();
+    }
+  });
+
+  if (loaderRef.current) {
+    observer.observe(loaderRef.current);
+  }
+
+  return () => observer.disconnect();
+}, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
     <div className="gifs">
-      {gifs.map((gif) => (
+      {gifs.map((gif: any) => (
         <img
           key={gif.id}
           className="indGif"
@@ -86,9 +84,26 @@ export function Gifs({ query, offset, setOffset, gifs, setGifs}: Props) {
           alt={gif.title}
         />
       ))}
-
-      {loading && <div className="loadingSection"><img className="loading" src="./public/loading.png"></img></div>}
-      {isError && <div className="errorSection"><img className="error" src="./public/error.png"></img></div>}
+      {isFetchingNextPage && (
+      <div className="loadingSection">
+        <DotLottieReact
+        className="loading"
+      src="https://lottie.host/1840eb0d-bf5b-44fc-b67f-6bfd810a79b8/GEYsY7fQIr.lottie"
+      loop
+      autoplay
+    />
+      </div>
+      )}
+      {isLoading && <div className="loadingSection"><DotLottieReact
+      src="https://lottie.host/2107664b-4a52-4c7b-9666-dedec5388e73/q6QGkyiCxm.lottie"
+      loop
+      autoplay
+    /></div>}
+      {isError && <div className="errorSection"><DotLottieReact
+      src="https://lottie.host/b9b3b23c-fd17-4eb6-97e0-52f6169b63cd/OtaG2xmro9.lottie"
+      loop
+      autoplay
+    /></div>}
 
       <div ref={loaderRef}></div>
     </div>
