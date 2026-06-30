@@ -31,7 +31,7 @@ function App() {
         <TrendingBar setQuery={setQuery} ></TrendingBar>
       </div>
       <div className='mainContent'>
-          <Gifs offset={offset} setOffset={setOffset} gifs={gifs} setGifs={setGifs} query={query}></Gifs>
+          <Gifs query={query}></Gifs>
       </div>
       <div className='footer'>
         <div>
