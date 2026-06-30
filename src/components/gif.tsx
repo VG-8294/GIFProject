@@ -28,7 +28,7 @@ export function Gifs({ query, offset, setOffset, gifs, setGifs}: Props) {
       let url = "";
 
       if (query.trim() === "") {
-        url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY2}&limit=15&offset=${offset}`;
+        url = `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY2}&limit=10&offset=${offset}`;
       } else {
         url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY2}&q=${query}&limit=25&offset=${offset}`;
       }
