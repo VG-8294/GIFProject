@@ -7,6 +7,7 @@ import {useEffect, useState } from 'react';
 // import { ScrolledHeader } from './components/ScrolledHeader';
 import { TrendingBar } from './components/trendingBar';
 import { useDebounce } from './hooks/debounce';
+import { Footer } from './components/footer';
 function App() {
 
   // const [offset, setOffset] = useState(0);
@@ -26,10 +27,8 @@ function App() {
       <div className='mainContent'>
           <Gifs query={debouncedQuery}></Gifs>
       </div>
-      <div className='footer'>
-        <div>
-          <h3>Footer</h3>
-        </div>
+      <div>
+        <Footer></Footer>
       </div>
     {/* {isScrolled && <div className='scrolledHeader'>
       <ScrolledHeader></ScrolledHeader>
